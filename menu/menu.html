@@ -1,0 +1,97 @@
+<!-- Нижнее меню -->
+<nav class="bottom-nav">
+    <a href="#home" class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span>Главная</span>
+    </a>
+    <a href="#catalog" class="nav-item">
+        <i class="fas fa-list"></i>
+        <span>Каталог</span>
+    </a>
+    <a href="#cart" class="nav-item cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Корзина</span>
+        <span class="cart-count">3</span>
+    </a>
+    <a href="#favorites" class="nav-item">
+        <i class="fas fa-heart"></i>
+        <span>Избранное</span>
+    </a>
+    <a href="#profile" class="nav-item">
+        <i class="far fa-user"></i>
+        <span>Профиль</span>
+    </a>
+</nav>
+
+<style>
+    /* Стили нижнего меню */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #777;
+        font-size: 12px;
+        transition: all 0.3s;
+        position: relative;
+        padding: 5px 10px;
+    }
+    
+    .nav-item i {
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+    
+    .nav-item.active {
+        color: #b08e77;
+    }
+    
+    .nav-item:hover {
+        color: #b08e77;
+    }
+    
+    .cart-count {
+        position: absolute;
+        top: -5px;
+        right: 0;
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+    }
+    
+    @media (min-width: 768px) {
+        .bottom-nav {
+            display: none; /* Скрываем на десктопах */
+        }
+    }
+</style>
+
+<script>
+    // Подсветка активного пункта меню
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>
