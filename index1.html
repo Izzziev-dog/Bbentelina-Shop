@@ -1,2477 +1,1235 @@
-﻿<!DOCTYPE html>
-<html>
+```html
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-	<title>be1.ru</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bentelina - элитная парфюмерия со всего мира</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        body {
+            background-color: #f9f3f0;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 70px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Обновлённая шапка */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #b08e77;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #b08e77;
+            transition: width 0.3s ease;
+        }
+        
+        .logo:hover::after {
+            width: 60px;
+        }
+        
+        .header-actions a {
+            color: #333;
+            font-size: 18px;
+            margin-left: 25px;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .header-actions a:hover {
+            color: #b08e77;
+            transform: translateY(-3px);
+        }
+        
+        .header-actions a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: #b08e77;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .header-actions a:hover::after {
+            width: 100%;
+        }
+
+        /* Герой-секция */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(176, 142, 119, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #b08e77;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid #b08e77;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(176, 142, 119, 0.3);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Секция "О нас" */
+        .about {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #b08e77;
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #b08e77;
+        }
+        
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        .about-text.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #b08e77;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        
+        .about-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Секция "Категории" */
+        .categories-section {
+            padding: 100px 0;
+            background-color: #f9f3f0;
+        }
+        
+        .category {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #b08e77;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #b08e77;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+        
+        .product-card .price {
+            font-weight: 600;
+            color: #b08e77;
+            font-size: 1.2rem;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: #f5f5f5;
+            color: #b08e77;
+            border: 2px solid #b08e77;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-to-cart:hover {
+            background: #b08e77;
+            color: white;
+        }
+        
+        .add-to-cart.added {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        /* Корзина */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cart-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .cart-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        
+        .cart-modal.active .cart-content {
+            transform: translateY(0);
+        }
+        
+        .cart-header {
+            background: #b08e77;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .cart-item-info {
+            margin-left: 15px;
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #b08e77;
+            font-weight: 600;
+        }
+        
+        .cart-item-remove {
+            color: #e74c3c;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-total {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #b08e77;
+            border-top: 1px solid #eee;
+        }
+        
+        .cart-actions {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #b08e77;
+            border: 2px solid #b08e77;
+        }
+        
+        .btn-secondary:hover {
+            background: #f5f5f5;
+        }
+        
+        /* Платежная форма */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .payment-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .payment-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        
+        .payment-modal.active .payment-content {
+            transform: translateY(0);
+        }
+        
+        .payment-header {
+            background: #b08e77;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .payment-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+        
+        .payment-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .payment-method.selected {
+            border-color: #b08e77;
+            background-color: #f9f3f0;
+        }
+        
+        .payment-method i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: #b08e77;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .success-message.active {
+            display: block;
+        }
+        
+        .success-message i {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        
+        /* Нижнее меню */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #777;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        .nav-item.active {
+            color: #b08e77;
+            font-weight: 500;
+        }
+        
+        .nav-item:hover {
+            color: #b08e77;
+            transform: translateY(-3px);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: 0;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none;
+            }
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+    </style>
 </head>
 <body>
-<p>```html</p>
-
-<p>&lt;!DOCTYPE html&gt;</p>
-
-<p>&lt;html lang=&quot;ru&quot;&gt;</p>
-
-<p>&lt;head&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;meta charset=&quot;UTF-8&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;title&gt;Bentelina - элитная парфюмерия со всего мира&lt;/title&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;style&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Основные стили */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; * {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-sizing: border-box;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Montserrat&#39;, &#39;Arial&#39;, sans-serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; body {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #f9f3f0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #333;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; line-height: 1.6;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-bottom: 70px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow-x: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .container {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 1200px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 0 auto;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 0 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Обновлённая шапка */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; header {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: rgba(255, 255, 255, 0.98);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 15px 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: fixed;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 1000;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; backdrop-filter: blur(10px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; header.scrolled {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 10px 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .header-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-between;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .logo {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 26px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 700;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; letter-spacing: 1.5px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .logo::after {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; content: &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bottom: -5px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 40px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 2px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: width 0.3s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .logo:hover::after {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 60px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .header-actions a {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #333;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 18px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-left: 25px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-decoration: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .header-actions a:hover {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(-3px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .header-actions a::after {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; content: &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bottom: -3px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 50%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 1px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: all 0.3s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(-50%);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .header-actions a:hover::after {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Герой-секция */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .hero {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100vh;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url(&#39;https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=80&#39;) no-repeat center center/cover;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #fff;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-top: 70px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .hero::before {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; content: &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; right: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bottom: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: radial-gradient(circle at center, rgba(176, 142, 119, 0.1) 0%, transparent 70%);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pointer-events: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .hero-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 800px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 0 auto;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 0 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; animation: fadeInUp 1s ease forwards;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .hero h1 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 3.5rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .hero p {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.2rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 30px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0.9;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .btn {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: inline-block;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 14px 32px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 30px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-decoration: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.1rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 2px solid #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .btn::before {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; content: &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: -100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: 0.5s;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: -1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .btn:hover {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(-5px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 10px 25px rgba(176, 142, 119, 0.3);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .btn:hover::before {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Секция &quot;О нас&quot; */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 100px 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #fff;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .section-title {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 2.5rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 60px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .section-title::after {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; content: &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bottom: -15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 50%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(-50%);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 80px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 3px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .section-title.visible {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 50px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-wrap: wrap;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-text {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-width: 300px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(-30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-text.visible {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-text h3 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.8rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-text p {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #555;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; line-height: 1.8;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-image {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-width: 300px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-image.visible {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-image img {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: auto;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: block;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: transform 0.5s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .about-image:hover img {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: scale(1.05);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Секция &quot;Категории&quot; */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .categories-section {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 100px 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #f9f3f0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .category {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 60px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .category.visible {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .category-title {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 2rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 30px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .products-grid {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: grid;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 30px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-card {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: all 0.4s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-card.visible {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-card:hover {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(-10px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-badge {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 5px 10px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 6px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 0.8rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 2;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-card .price {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.2rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-card img {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 250px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; object-fit: cover;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: transform 0.5s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-card:hover img {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: scale(1.1);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-info {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .product-info h4 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.3rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 10px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #333;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .add-to-cart {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #f5f5f5;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 2px solid #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cursor: pointer;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-top: 10px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: all 0.3s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .add-to-cart:hover {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .add-to-cart.added {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #4CAF50;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Корзина */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-modal {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: fixed;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: rgba(0, 0, 0, 0.5);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 2000;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: opacity 0.3s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-modal.active {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 90%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 600px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: transform 0.4s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-modal.active .cart-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-header {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-between;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-header h2 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.8rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .close-cart {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.5rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cursor: pointer;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-items {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-height: 400px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow-y: auto;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-item {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 15px 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-bottom: 1px solid #eee;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-item img {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 80px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 80px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; object-fit: cover;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-item-info {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-left: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-item-name {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 5px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-item-price {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-item-remove {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #e74c3c;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cursor: pointer;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.2rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-total {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-between;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.2rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 600;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-top: 1px solid #eee;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-actions {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .btn-secondary {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 2px solid #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .btn-secondary:hover {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #f5f5f5;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Платежная форма */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-modal {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: fixed;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: rgba(0, 0, 0, 0.5);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 2000;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: opacity 0.3s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-modal.active {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 90%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 500px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: transform 0.4s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-modal.active .payment-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-header {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-header h2 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.8rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-form {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 30px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .form-group {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .form-group label {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: block;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 8px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 500;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #555;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .form-group input {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 1px solid #ddd;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-methods {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-method {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 1px solid #ddd;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 10px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cursor: pointer;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-method.selected {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #f9f3f0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .payment-method i {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.5rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-right: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .success-message {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 40px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .success-message.active {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: block;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .success-message i {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 4rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #4CAF50;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .success-message h3 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.8rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #4CAF50;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 15px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Нижнее меню */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .bottom-nav {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: fixed;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bottom: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; right: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-around;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 10px 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 999;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-top: 1px solid #eee;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .nav-item {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-decoration: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #777;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 12px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: all 0.3s ease;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 5px 10px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .nav-item i {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 20px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 3px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .nav-item.active {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 500;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .nav-item:hover {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #b08e77;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(-3px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .cart-count {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: -5px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; right: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #e74c3c;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: white;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 50%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 18px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 18px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 10px;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: bold;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; @media (min-width: 768px) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .bottom-nav {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Анимации */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; @keyframes fadeInUp {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; from {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(30px);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; to {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; @keyframes ripple {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0% {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: scale(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 100% {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: scale(4);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; opacity: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .ripple {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 50%;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: rgba(255, 255, 255, 0.6);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: scale(0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; animation: ripple 0.6s linear;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pointer-events: none;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; /* Адаптивность */</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; @media (max-width: 768px) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .hero h1 {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 2.5rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .hero p {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 1.1rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .section-title {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 2rem;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .about-content {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .about-image {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; order: -1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &lt;/style&gt;</p>
-
-<p>&lt;/head&gt;</p>
-
-<p>&lt;body&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Упрощенная шапка --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;header&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;container&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;header-content&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;logo&quot;&gt;BENTELINA&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;header-actions&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#search&quot; class=&quot;search-btn&quot;&gt;&lt;i class=&quot;fas fa-search&quot;&gt;&lt;/i&gt;&lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#profile&quot; class=&quot;profile-btn&quot;&gt;&lt;i class=&quot;far fa-user&quot;&gt;&lt;/i&gt;&lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/header&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Герой-секция --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;section class=&quot;hero&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;container&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;hero-content&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h1&gt;Элитная парфюмерия со всего мира&lt;/h1&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Bentelina - это уникальная коллекция изысканных ароматов от ведущих мировых домов моды и нишевых парфюмеров&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#catalog&quot; class=&quot;btn&quot;&gt;Открыть каталог&lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/section&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Секция &quot;О нас&quot; --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;section id=&quot;about&quot; class=&quot;about&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;container&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h2 class=&quot;section-title animate-on-scroll&quot;&gt;О НАШЕМ МАГАЗИНЕ&lt;/h2&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;about-content&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;about-text animate-on-scroll delay-1&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3&gt;Bentelina - мир изысканных ароматов&lt;/h3&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Мы - премиальный бутик парфюмерии, предлагающий эксклюзивные ароматы со всего мира. Наша коллекция включает культовые ароматы от ведущих модных домов и редкие нишевые композиции.&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Каждый аромат проходит строгий контроль подлинности и качества. Мы сотрудничаем напрямую с производителями, обеспечивая вам оригинальную продукцию по лучшим ценам.&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Наша команда экспертов поможет подобрать идеальный аромат, соответствующий вашему характеру и стилю жизни.&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;about-image animate-on-scroll delay-2&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Магазин Bentelina&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/section&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Секция &quot;Категории&quot; --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;section id=&quot;categories&quot; class=&quot;categories-section&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;container&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h2 class=&quot;section-title animate-on-scroll&quot;&gt;Наши коллекции&lt;/h2&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Категория: Женские ароматы --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;category animate-on-scroll delay-1&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3 class=&quot;category-title&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-venus&quot; style=&quot;color: #e83e8c; margin-right: 10px;&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Женские ароматы</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/h3&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;products-grid&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товар 1 --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-card animate-on-scroll delay-2&quot; data-id=&quot;1&quot; data-name=&quot;Chanel №5&quot; data-price=&quot;12490&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-badge&quot;&gt;Хит&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1588676190739-03449928599b?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Chanel №5&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Chanel №5&lt;/h4&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;price&quot;&gt;12 490 ₽&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;add-to-cart&quot;&gt;В корзину&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товар 2 --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-card animate-on-scroll delay-3&quot; data-id=&quot;2&quot; data-name=&quot;Miss Dior&quot; data-price=&quot;10990&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1584308666729-b8e9585d9783?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Miss Dior&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Miss Dior&lt;/h4&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;price&quot;&gt;10 990 ₽&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;add-to-cart&quot;&gt;В корзину&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товар 3 --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-card animate-on-scroll delay-4&quot; data-id=&quot;3&quot; data-name=&quot;Tom Ford Black Orchid&quot; data-price=&quot;22800&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-badge&quot;&gt;New&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Tom Ford Black Orchid&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Tom Ford Black Orchid&lt;/h4&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;price&quot;&gt;22 800 ₽&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;add-to-cart&quot;&gt;В корзину&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товар 4 --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-card animate-on-scroll delay-5&quot; data-id=&quot;4&quot; data-name=&quot;Dior Sauvage&quot; data-price=&quot;18500&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-badge&quot; style=&quot;background: #e74c3c;&quot;&gt;-15%&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1623652442171-611e3f918389?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Dior Sauvage&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Dior Sauvage&lt;/h4&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;price&quot;&gt;18 500 ₽ &lt;span style=&quot;text-decoration: line-through; font-size: 0.8rem; color: #999;&quot;&gt;21 800 ₽&lt;/span&gt;&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;add-to-cart&quot;&gt;В корзину&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Категория: Мужские ароматы --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;category animate-on-scroll delay-6&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3 class=&quot;category-title&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-mars&quot; style=&quot;color: #3498db; margin-right: 10px;&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Мужские ароматы</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/h3&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;products-grid&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товар 5 --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-card animate-on-scroll delay-7&quot; data-id=&quot;5&quot; data-name=&quot;Creed Aventus&quot; data-price=&quot;35000&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1623652442171-611e3f918389?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Creed Aventus&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Creed Aventus&lt;/h4&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;price&quot;&gt;35 000 ₽&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;add-to-cart&quot;&gt;В корзину&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товар 6 --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-card animate-on-scroll delay-8&quot; data-id=&quot;6&quot; data-name=&quot;Bleu de Chanel&quot; data-price=&quot;14200&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://images.unsplash.com/photo-1588676190739-b8e9585d9783?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot; alt=&quot;Bleu de Chanel&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;product-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Bleu de Chanel&lt;/h4&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;price&quot;&gt;14 200 ₽&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;add-to-cart&quot;&gt;В корзину&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/section&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Нижнее меню --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;nav class=&quot;bottom-nav&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#home&quot; class=&quot;nav-item active&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-home&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Главная&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#categories&quot; class=&quot;nav-item&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-list&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Каталог&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#cart&quot; class=&quot;nav-item cart-btn&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-shopping-cart&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Корзина&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=&quot;cart-count&quot;&gt;0&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#favorites&quot; class=&quot;nav-item&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-heart&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Избранное&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;a href=&quot;#profile&quot; class=&quot;nav-item&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;far fa-user&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Профиль&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/a&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/nav&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Модальное окно корзины --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;div class=&quot;cart-modal&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-content&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-header&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h2&gt;Корзина&lt;/h2&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;close-cart&quot;&gt;&amp;times;&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-items&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Товары будут добавляться сюда --&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-total&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Итого: &lt;span id=&quot;cart-total-price&quot;&gt;0 ₽&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-actions&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;btn btn-secondary close-cart&quot;&gt;Продолжить покупки&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;btn&quot; id=&quot;checkout-btn&quot;&gt;Оформить заказ&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;!-- Модальное окно оплаты --&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;div class=&quot;payment-modal&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;payment-content&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;payment-header&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h2&gt;Оплата заказа&lt;/h2&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;payment-form&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;form-group&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;label for=&quot;name&quot;&gt;ФИО&lt;/label&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=&quot;text&quot; id=&quot;name&quot; placeholder=&quot;Введите ваше имя&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;form-group&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;label for=&quot;phone&quot;&gt;Телефон&lt;/label&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=&quot;tel&quot; id=&quot;phone&quot; placeholder=&quot;Введите номер телефона&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;form-group&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;Введите email&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;payment-methods&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;payment-method selected&quot; data-method=&quot;sfp&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-mobile-alt&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Система быстрых платежей (СБП)&lt;/span&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;form-group&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;label for=&quot;bank&quot;&gt;Банк&lt;/label&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;select id=&quot;bank&quot; class=&quot;form-control&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;option value=&quot;&quot;&gt;Выберите банк&lt;/option&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;option value=&quot;sber&quot;&gt;Сбербанк&lt;/option&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;option value=&quot;tinkoff&quot;&gt;Тинькофф&lt;/option&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;option value=&quot;vtb&quot;&gt;ВТБ&lt;/option&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;option value=&quot;alfabank&quot;&gt;Альфа-Банк&lt;/option&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;option value=&quot;raiffeisen&quot;&gt;Райффайзенбанк&lt;/option&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/select&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;btn&quot; id=&quot;pay-btn&quot;&gt;Оплатить&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;success-message&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;i class=&quot;fas fa-check-circle&quot;&gt;&lt;/i&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3&gt;Заказ оформлен!&lt;/h3&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Оплата успешно проведена через Систему быстрых платежей. Номер заказа: &lt;strong id=&quot;order-number&quot;&gt;&lt;/strong&gt;&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Скоро с вами свяжется менеджер для подтверждения доставки.&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;btn close-payment&quot; style=&quot;margin-top: 20px;&quot;&gt;Закрыть&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;script&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Анимации при скролле</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const animateElements = document.querySelectorAll(&#39;.animate-on-scroll&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const observer = new IntersectionObserver((entries) =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; entries.forEach(entry =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (entry.isIntersecting) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; entry.target.classList.add(&#39;visible&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }, { threshold: 0.1 });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; animateElements.forEach(element =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; observer.observe(element);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Плавная шапка при скролле</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener(&#39;scroll&#39;, function() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const header = document.querySelector(&#39;header&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (window.scrollY &gt; 50) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; header.classList.add(&#39;scrolled&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; header.classList.remove(&#39;scrolled&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Активация пунктов меню</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const navItems = document.querySelectorAll(&#39;.nav-item&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; navItems.forEach(item =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item.addEventListener(&#39;click&#39;, function(e) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Не обрабатываем клик, если это ссылка на корзину (будет обработан отдельно)</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (this.getAttribute(&#39;href&#39;) === &#39;#cart&#39;) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e.preventDefault();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; openCart();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; navItems.forEach(i =&gt; i.classList.remove(&#39;active&#39;));</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.classList.add(&#39;active&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Работа с корзиной</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; let cart = [];</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const cartCount = document.querySelector(&#39;.cart-count&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const cartModal = document.querySelector(&#39;.cart-modal&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const closeCartButtons = document.querySelectorAll(&#39;.close-cart&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const cartItems = document.querySelector(&#39;.cart-items&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const cartTotalPrice = document.getElementById(&#39;cart-total-price&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const checkoutBtn = document.getElementById(&#39;checkout-btn&#39;);</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Функция обновления счетчика корзины</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function updateCartCount() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const count = cart.reduce((total, item) =&gt; total + item.quantity, 0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartCount.textContent = count;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Функция обновления суммы корзины</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function updateCartTotal() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const total = cart.reduce((sum, item) =&gt; sum + (item.price * item.quantity), 0);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartTotalPrice.textContent = total.toLocaleString(&#39;ru-RU&#39;) + &#39; ₽&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Функция открытия корзины</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function openCart() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderCartItems();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateCartTotal();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartModal.classList.add(&#39;active&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.body.style.overflow = &#39;hidden&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Функция закрытия корзины</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function closeCart() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartModal.classList.remove(&#39;active&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.payment-modal&#39;).classList.remove(&#39;active&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.body.style.overflow = &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Сбрасываем форму оплаты</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.payment-form&#39;).style.display = &#39;block&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.success-message&#39;).classList.remove(&#39;active&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Рендеринг товаров в корзине</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function renderCartItems() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartItems.innerHTML = &#39;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (cart.length === 0) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartItems.innerHTML = &#39;&lt;p style=&quot;text-align: center; color: #999; padding: 20px;&quot;&gt;Корзина пуста&lt;/p&gt;&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cart.forEach(item =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const cartItem = document.createElement(&#39;div&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartItem.className = &#39;cart-item&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartItem.innerHTML = `</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;${item.image || &#39;https://via.placeholder.com/80&#39;}&quot; alt=&quot;${item.name}&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-item-info&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-item-name&quot;&gt;${item.name}&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;cart-item-price&quot;&gt;${item.price.toLocaleString(&#39;ru-RU&#39;)} ₽ &times; ${item.quantity}&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;cart-item-remove&quot; data-id=&quot;${item.id}&quot;&gt;&times;&lt;/button&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cartItems.appendChild(cartItem);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Добавляем обработчики удаления</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelectorAll(&#39;.cart-item-remove&#39;).forEach(button =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; button.addEventListener(&#39;click&#39;, function() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const id = this.getAttribute(&#39;data-id&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; removeFromCart(id);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Добавление товара в корзину</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; document.querySelectorAll(&#39;.add-to-cart&#39;).forEach(button =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; button.addEventListener(&#39;click&#39;, function() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const productCard = this.closest(&#39;.product-card&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const id = productCard.getAttribute(&#39;data-id&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const name = productCard.getAttribute(&#39;data-name&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const price = parseInt(productCard.getAttribute(&#39;data-price&#39;));</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const image = productCard.querySelector(&#39;img&#39;).src;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Создаем эффект волны</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const ripple = document.createElement(&#39;span&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ripple.classList.add(&#39;ripple&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.appendChild(ripple);</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(() =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ripple.remove();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 600);</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Проверяем, есть ли уже такой товар в корзине</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const existingItem = cart.find(item =&gt; item.id === id);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (existingItem) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; existingItem.quantity += 1;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cart.push({</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; id,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; name,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; price,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; quantity: 1,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; image</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Обновляем интерфейс</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateCartCount();</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Меняем текст кнопки</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.textContent = &#39;✓ Добавлено&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.classList.add(&#39;added&#39;);</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(() =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.textContent = &#39;В корзину&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.classList.remove(&#39;added&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 2000);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Удаление товара из корзины</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function removeFromCart(id) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cart = cart.filter(item =&gt; item.id !== id);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderCartItems();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateCartCount();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateCartTotal();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Обработчики открытия/закрытия корзины</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.cart-btn&#39;).addEventListener(&#39;click&#39;, openCart);</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; closeCartButtons.forEach(button =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; button.addEventListener(&#39;click&#39;, closeCart);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Оформление заказа</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; checkoutBtn.addEventListener(&#39;click&#39;, function() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (cart.length === 0) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert(&#39;Добавьте товары в корзину&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; closeCart();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.payment-modal&#39;).classList.add(&#39;active&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.body.style.overflow = &#39;hidden&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Выбор метода оплаты</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; document.querySelectorAll(&#39;.payment-method&#39;).forEach(method =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; method.addEventListener(&#39;click&#39;, function() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelectorAll(&#39;.payment-method&#39;).forEach(m =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; m.classList.remove(&#39;selected&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.classList.add(&#39;selected&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Оплата</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&#39;pay-btn&#39;).addEventListener(&#39;click&#39;, function() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const name = document.getElementById(&#39;name&#39;).value;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const phone = document.getElementById(&#39;phone&#39;).value;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const email = document.getElementById(&#39;email&#39;).value;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const bank = document.getElementById(&#39;bank&#39;).value;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!name || !phone || !email || !bank) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert(&#39;Заполните все поля&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Генерируем номер заказа</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const orderNumber = &#39;ORD-&#39; + Math.floor(100000 + Math.random() * 900000);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&#39;order-number&#39;).textContent = orderNumber;</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Скрываем форму и показываем сообщение об успехе</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.payment-form&#39;).style.display = &#39;none&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.success-message&#39;).classList.add(&#39;active&#39;);</p>
-
-<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Очищаем корзину</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cart = [];</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateCartCount();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderCartItems();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Закрытие окна оплаты</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; document.querySelector(&#39;.close-payment&#39;).addEventListener(&#39;click&#39;, closeCart);</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Закрытие модальных окон при клике вне контента</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener(&#39;click&#39;, function(e) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.target === cartModal) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; closeCart();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.target === document.querySelector(&#39;.payment-modal&#39;)) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; closeCart();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // Инициализация</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; updateCartCount();</p>
-
-<p>&nbsp; &nbsp; &lt;/script&gt;</p>
-
-<p>&lt;/body&gt;</p>
-
-<p>&lt;/html&gt;</p>
-
-<p>```</p>
+    <!-- Упрощенная шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">BENTELINA</div>
+                <div class="header-actions">
+                    <a href="#search" class="search-btn"><i class="fas fa-search"></i></a>
+                    <a href="#profile" class="profile-btn"><i class="far fa-user"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Элитная парфюмерия со всего мира</h1>
+                <p>Bentelina - это уникальная коллекция изысканных ароматов от ведущих мировых домов моды и нишевых парфюмеров</p>
+                <a href="#catalog" class="btn">Открыть каталог</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "О нас" -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">О НАШЕМ МАГАЗИНЕ</h2>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll delay-1">
+                    <h3>Bentelina - мир изысканных ароматов</h3>
+                    <p>Мы - премиальный бутик парфюмерии, предлагающий эксклюзивные ароматы со всего мира. Наша коллекция включает культовые ароматы от ведущих модных домов и редкие нишевые композиции.</p>
+                    <p>Каждый аромат проходит строгий контроль подлинности и качества. Мы сотрудничаем напрямую с производителями, обеспечивая вам оригинальную продукцию по лучшим ценам.</p>
+                    <p>Наша команда экспертов поможет подобрать идеальный аромат, соответствующий вашему характеру и стилю жизни.</p>
+                </div>
+                <div class="about-image animate-on-scroll delay-2">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Магазин Bentelina">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "Категории" -->
+    <section id="categories" class="categories-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Наши коллекции</h2>
+            
+            <!-- Категория: Женские ароматы -->
+            <div class="category animate-on-scroll delay-1">
+                <h3 class="category-title">
+                    <i class="fas fa-venus" style="color: #e83e8c; margin-right: 10px;"></i>
+                    Женские ароматы
+                </h3>
+                
+                <div class="products-grid">
+                    <!-- Товар 1 -->
+                    <div class="product-card animate-on-scroll delay-2" data-id="1" data-name="Chanel №5" data-price="12490">
+                        <div class="product-badge">Хит</div>
+                        <img src="https://images.unsplash.com/photo-1588676190739-03449928599b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chanel №5">
+                        <div class="product-info">
+                            <h4>Chanel №5</h4>
+                            <div class="price">12 490 ₽</div>
+                            <button class="add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Товар 2 -->
+                    <div class="product-card animate-on-scroll delay-3" data-id="2" data-name="Miss Dior" data-price="10990">
+                        <img src="https://images.unsplash.com/photo-1584308666729-b8e9585d9783?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Miss Dior">
+                        <div class="product-info">
+                            <h4>Miss Dior</h4>
+                            <div class="price">10 990 ₽</div>
+                            <button class="add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Товар 3 -->
+                    <div class="product-card animate-on-scroll delay-4" data-id="3" data-name="Tom Ford Black Orchid" data-price="22800">
+                        <div class="product-badge">New</div>
+                        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tom Ford Black Orchid">
+                        <div class="product-info">
+                            <h4>Tom Ford Black Orchid</h4>
+                            <div class="price">22 800 ₽</div>
+                            <button class="add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Товар 4 -->
+                    <div class="product-card animate-on-scroll delay-5" data-id="4" data-name="Dior Sauvage" data-price="18500">
+                        <div class="product-badge" style="background: #e74c3c;">-15%</div>
+                        <img src="https://images.unsplash.com/photo-1623652442171-611e3f918389?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dior Sauvage">
+                        <div class="product-info">
+                            <h4>Dior Sauvage</h4>
+                            <div class="price">18 500 ₽ <span style="text-decoration: line-through; font-size: 0.8rem; color: #999;">21 800 ₽</span></div>
+                            <button class="add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Категория: Мужские ароматы -->
+            <div class="category animate-on-scroll delay-6">
+                <h3 class="category-title">
+                    <i class="fas fa-mars" style="color: #3498db; margin-right: 10px;"></i>
+                    Мужские ароматы
+                </h3>
+                
+                <div class="products-grid">
+                    <!-- Товар 5 -->
+                    <div class="product-card animate-on-scroll delay-7" data-id="5" data-name="Creed Aventus" data-price="35000">
+                        <img src="https://images.unsplash.com/photo-1623652442171-611e3f918389?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Creed Aventus">
+                        <div class="product-info">
+                            <h4>Creed Aventus</h4>
+                            <div class="price">35 000 ₽</div>
+                            <button class="add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Товар 6 -->
+                    <div class="product-card animate-on-scroll delay-8" data-id="6" data-name="Bleu de Chanel" data-price="14200">
+                        <img src="https://images.unsplash.com/photo-1588676190739-b8e9585d9783?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bleu de Chanel">
+                        <div class="product-info">
+                            <h4>Bleu de Chanel</h4>
+                            <div class="price">14 200 ₽</div>
+                            <button class="add-to-cart">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Нижнее меню -->
+    <nav class="bottom-nav">
+        <a href="#home" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Главная</span>
+        </a>
+        <a href="#categories" class="nav-item">
+            <i class="fas fa-list"></i>
+            <span>Каталог</span>
+        </a>
+        <a href="#cart" class="nav-item cart-btn">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Корзина</span>
+            <span class="cart-count">0</span>
+        </a>
+        <a href="#favorites" class="nav-item">
+            <i class="fas fa-heart"></i>
+            <span>Избранное</span>
+        </a>
+        <a href="#profile" class="nav-item">
+            <i class="far fa-user"></i>
+            <span>Профиль</span>
+        </a>
+    </nav>
+
+    <!-- Модальное окно корзины -->
+    <div class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Корзина</h2>
+                <button class="close-cart">&times;</button>
+            </div>
+            <div class="cart-items">
+                <!-- Товары будут добавляться сюда -->
+            </div>
+            <div class="cart-total">
+                Итого: <span id="cart-total-price">0 ₽</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-secondary close-cart">Продолжить покупки</button>
+                <button class="btn" id="checkout-btn">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно оплаты -->
+    <div class="payment-modal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h2>Оплата заказа</h2>
+            </div>
+            <div class="payment-form">
+                <div class="form-group">
+                    <label for="name">ФИО</label>
+                    <input type="text" id="name" placeholder="Введите ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" placeholder="Введите номер телефона">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Введите email">
+                </div>
+                <div class="payment-methods">
+                    <div class="payment-method selected" data-method="sfp">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Система быстрых платежей (СБП)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bank">Банк</label>
+                    <select id="bank" class="form-control">
+                        <option value="">Выберите банк</option>
+                        <option value="sber">Сбербанк</option>
+                        <option value="tinkoff">Тинькофф</option>
+                        <option value="vtb">ВТБ</option>
+                        <option value="alfabank">Альфа-Банк</option>
+                        <option value="raiffeisen">Райффайзенбанк</option>
+                    </select>
+                </div>
+                <button class="btn" id="pay-btn">Оплатить</button>
+            </div>
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h3>Заказ оформлен!</h3>
+                <p>Оплата успешно проведена через Систему быстрых платежей. Номер заказа: <strong id="order-number"></strong></p>
+                <p>Скоро с вами свяжется менеджер для подтверждения доставки.</p>
+                <button class="btn close-payment" style="margin-top: 20px;">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Анимации при скролле
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Плавная шапка при скролле
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Активация пунктов меню
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Не обрабатываем клик, если это ссылка на корзину (будет обработан отдельно)
+                if (this.getAttribute('href') === '#cart') {
+                    e.preventDefault();
+                    openCart();
+                    return;
+                }
+                
+                navItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Работа с корзиной
+        let cart = [];
+        const cartCount = document.querySelector('.cart-count');
+        const cartModal = document.querySelector('.cart-modal');
+        const closeCartButtons = document.querySelectorAll('.close-cart');
+        const cartItems = document.querySelector('.cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Функция обновления счетчика корзины
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+        }
+
+        // Функция обновления суммы корзины
+        function updateCartTotal() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalPrice.textContent = total.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        // Функция открытия корзины
+        function openCart() {
+            renderCartItems();
+            updateCartTotal();
+            cartModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Функция закрытия корзины
+        function closeCart() {
+            cartModal.classList.remove('active');
+            document.querySelector('.payment-modal').classList.remove('active');
+            document.body.style.overflow = '';
+            // Сбрасываем форму оплаты
+            document.querySelector('.payment-form').style.display = 'block';
+            document.querySelector('.success-message').classList.remove('active');
+        }
+
+        // Рендеринг товаров в корзине
+        function renderCartItems() {
+            cartItems.innerHTML = '';
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Корзина пуста</p>';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image || 'https://via.placeholder.com/80'}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString('ru-RU')} ₽ × ${item.quantity}</div>
+                    </div>
+                    <button class="cart-item-remove" data-id="${item.id}">×</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Добавляем обработчики удаления
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    removeFromCart(id);
+                });
+            });
+        }
+
+        // Добавление товара в корзину
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const id = productCard.getAttribute('data-id');
+                const name = productCard.getAttribute('data-name');
+                const price = parseInt(productCard.getAttribute('data-price'));
+                const image = productCard.querySelector('img').src;
+                
+                // Создаем эффект волны
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+                
+                // Проверяем, есть ли уже такой товар в корзине
+                const existingItem = cart.find(item => item.id === id);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        quantity: 1,
+                        image
+                    });
+                }
+                
+                // Обновляем интерфейс
+                updateCartCount();
+                
+                // Меняем текст кнопки
+                this.textContent = '✓ Добавлено';
+                this.classList.add('added');
+                
+                setTimeout(() => {
+                    this.textContent = 'В корзину';
+                    this.classList.remove('added');
+                }, 2000);
+            });
+        });
+
+        // Удаление товара из корзины
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            renderCartItems();
+            updateCartCount();
+            updateCartTotal();
+        }
+
+        // Обработчики открытия/закрытия корзины
+        document.querySelector('.cart-btn').addEventListener('click', openCart);
+        
+        closeCartButtons.forEach(button => {
+            button.addEventListener('click', closeCart);
+        });
+
+        // Оформление заказа
+        checkoutBtn.addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Добавьте товары в корзину');
+                return;
+            }
+            closeCart();
+            document.querySelector('.payment-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Выбор метода оплаты
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => {
+                    m.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+
+        // Оплата
+        document.getElementById('pay-btn').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const bank = document.getElementById('bank').value;
+            
+            if (!name || !phone || !email || !bank) {
+                alert('Заполните все поля');
+                return;
+            }
+            
+            // Генерируем номер заказа
+            const orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('order-number').textContent = orderNumber;
+            
+            // Скрываем форму и показываем сообщение об успехе
+            document.querySelector('.payment-form').style.display = 'none';
+            document.querySelector('.success-message').classList.add('active');
+            
+            // Очищаем корзину
+            cart = [];
+            updateCartCount();
+            renderCartItems();
+        });
+
+        // Закрытие окна оплаты
+        document.querySelector('.close-payment').addEventListener('click', closeCart);
+
+        // Закрытие модальных окон при клике вне контента
+        window.addEventListener('click', function(e) {
+            if (e.target === cartModal) {
+                closeCart();
+            }
+            if (e.target === document.querySelector('.payment-modal')) {
+                closeCart();
+            }
+        });
+
+        // Инициализация
+        updateCartCount();
+    </script>
 </body>
 </html>
+```
